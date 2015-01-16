@@ -1,0 +1,29 @@
+   {% extends 'visas/base.html' %}
+    {% block content %} 
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>UVisa</h1>
+        <p class="lead">
+          Please enter your name and password to continue.
+          <br>
+          <span class="alt-language">Por favor escriba su nombre y contraseña para continuar.</span>
+        </p>
+        <form class="form-signin">
+          <label for="inputEmail" class="sr-only">Name</label>
+          <input type="email" id="inputEmail" class="form-control" placeholder="Name / Nombre" required autofocus>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password / Contraseña" required>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div>
+          <p>
+            <button class="btn btn-lg btn-primary" type="submit-en">English</button>
+            <button class="btn btn-lg btn-warning" type="submit-es">Español</button>
+          </p>
+        </form>
+      </div>
+
+    {% endblock %}
