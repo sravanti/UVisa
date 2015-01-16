@@ -5,6 +5,9 @@ body {
 p {
 	color: #337AB7;
 }
+h1 {
+  font-weight: bold;
+}
 .starter-template {
   padding: 40px 15px;
   text-align: center;
