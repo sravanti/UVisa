@@ -1,0 +1,9 @@
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+        {{ question.question_eng }}
+       <h4> This should be an answer box </h4>
+    {% endfor %}
+    <input type="submit" value="Submit" />
+</form>

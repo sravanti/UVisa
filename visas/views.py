@@ -1,5 +1,67 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# Create your views here.
+from django.template import RequestContext
+from django.contrib.auth import authenticate, login
+from visas.forms import *
+
+"""
+Register / login / logout
+"""
 def index(request):
     return render(request,'visas/index.html')
+
+def register(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        if user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            registered = True
+            form = Form.objects.get_or_create(user=user)
+        else: 
+            print user_form.errors
+    else:
+        user_form = UserForm()
+
+def user_login(request):
+   if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect('/')
+            # TODO: Redirect to a success page.
+        else:
+            return redirect('/')
+            # TODO: Return a 'disabled account' error message
+    
+
+def user_logout(request):
+    logout(request)
+    return redirect('/')
+
+"""
+Form submission
+"""
+def load_form(request):
+    user = request.user
+    if request.method == 'POST':
+        form = FormForm(request.POST)
+        if form.is_valid():
+           return redirect('/')
+    else:
+        form = Form.objects.get(user=user)
+        first_unanswered = form.is_complete
+    return render(request, 'visas/form.html', 
+                {'questions': form.questions,
+                'answers': form.answers,
+                'first_unanswered': first_unanswered})
+
+
+
+
+
+ 
