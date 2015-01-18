@@ -20,6 +20,7 @@ h1 {
   padding: 0;
 }
 
+
 /* BLINK EFFECT by bkellgren of StackOverflow */
 .blink {
   -webkit-animation: blink 1s steps(5, start) infinite;
