@@ -18,15 +18,16 @@ function beginInterview(userLang) {
 
 //when user presses record button
 function toggleAudio() {
-	if (recording == 0) { //waiting
-		recording = 1; //capturing
-		document.getElementById("recording-button").className = "btn btn-lg btn-danger col-md-offset-3";
-		document.getElementById("recording-icon").className = "glyphicon glyphicon-record blink";
-	} else {
+ 	if (recording ==1) { //capturing
 		recording = 2; //sending
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-ok";
 		document.getElementById("recording-button").className = "btn btn-lg btn-success col-md-offset-3";
 		document.getElementById("next-button").className = "btn btn-lg btn-primary col-md-offset-3";
+	}
+	else { //waiting
+		recording = 1; //capturing
+		document.getElementById("recording-button").className = "btn btn-lg btn-danger col-md-offset-3";
+		document.getElementById("recording-icon").className = "glyphicon glyphicon-record blink";
 	}
 }
 
@@ -44,4 +45,5 @@ function nextVideo() {
 	recording = 0;
 	document.getElementById("recording-button").className = "btn btn-lg btn-default col-md-offset-3";
 	document.getElementById("recording-icon").className = "glyphicon glyphicon-record";
+	document.getElementById("next-button").className = "btn btn-lg btn-default col-md-offset-3";
 }
