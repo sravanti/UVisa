@@ -21,9 +21,10 @@ function toggleAudio() {
 	if (recording == 0) { //waiting
 		recording = 1; //capturing
 		document.getElementById("recording-button").className = "btn btn-lg btn-danger col-md-offset-3";
+		document.getElementById("recording-icon").className = "glyphicon glyphicon-record blink";
 	} else {
 		recording = 2; //sending
-		document.getElementById("recording-button").innerHTML = '<span class="glyphicon glyphicon-ok"></span>';
+		document.getElementById("recording-icon").className = "glyphicon glyphicon-ok";
 		document.getElementById("recording-button").className = "btn btn-lg btn-success col-md-offset-3";
 		document.getElementById("next-button").className = "btn btn-lg btn-primary col-md-offset-3";
 	}
@@ -32,4 +33,9 @@ function toggleAudio() {
 //when a new video prompt needs to be inserted and played
 function nextVideo() {
 	document.getElementById("video-frame").src = 'http://www.youtube.com/embed/eGilvHv0_bE?rel=0' + '&autoplay=1';
+
+	//reset audio
+	recording = 0;
+	document.getElementById("recording-button").className = "btn btn-lg btn-default col-md-offset-3";
+	document.getElementById("recording-icon").className = "glyphicon glyphicon-record";
 }
