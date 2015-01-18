@@ -33,6 +33,13 @@ Select icons provided by:
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Recording scripts, credit to http://subinsb.com/html5-record-mic-voice -->
+    <script src="http://lab.subinsb.com/projects/jquery/core/jquery-2.1.1.js"></script>
+    <script src="cdn/recorder.js"></script>
+    <script src="cdn/jquery.voice.js"></script>
+    <script src="cdn/record.js"></script>
+
   </head>
 
   <body>
@@ -86,6 +93,50 @@ Select icons provided by:
       </div>
 
       <div id="content-prompt-english" class="starter-template no-margins">
+
+        <!-- recording controls -->
+        <audio controls src="" id="audio"></audio>
+        <div style="margin:10px;">
+          <a class="button" id="record">Record</a>
+          <a class="button disabled one" id="stop">Reset</a>
+          <a class="button disabled one" id="play">Play</a>
+          <a class="button disabled one" id="download">Download</a>
+        </div>
+        <input class="button" type="checkbox" id="live"/>
+        <label for="live">Live Output</label>
+
+        <style>
+        .button{
+          display: inline-block;
+          vertical-align: middle;
+          margin: 0px 5px;
+          padding: 5px 12px;
+          cursor: pointer;
+          outline: none;
+          font-size: 13px;
+          text-decoration: none !important;
+          text-align: center;
+          color:#fff;
+          background-color: #4D90FE;
+          background-image: linear-gradient(top,#4D90FE, #4787ED);
+          background-image: -ms-linear-gradient(top,#4D90FE, #4787ED);
+          background-image: -o-linear-gradient(top,#4D90FE, #4787ED);
+          background-image: linear-gradient(top,#4D90FE, #4787ED);
+          border: 1px solid #4787ED;
+          box-shadow: 0 1px 3px #BFBFBF;
+        }
+        a.button{
+          color: #fff;
+        }
+        .button:hover{
+          box-shadow: inset 0px 1px 1px #8C8C8C;
+        }
+        .button.disabled{
+          box-shadow:none;
+          opacity:0.7;
+        }
+        </style>
+
         <h1 id="question-title">1. Introduction</h1>
         <div class="col-md-6 col-md-offset-3">
           <div id="video-wrapper" class="well">
@@ -119,10 +170,12 @@ Select icons provided by:
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>   -->
+<!-- conflicting with jquery 2 call earlier -->
     <script src="../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+
     <script type="text/javascript" src="interview.js"></script>
   </body>
 </html>

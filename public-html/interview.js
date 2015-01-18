@@ -38,7 +38,7 @@ function nextVideo() {
 		//transcription
 
 	//display next video
-	document.getElementById("video-frame").src = 'http://www.youtube.com/embed/eGilvHv0_bE?rel=0' + '&autoplay=1';
+	document.getElementById("video-frame").src = 'http://www.youtube.com/embed/fgxuM8DH6k8' + '?rel=0&autoplay=1';
 
 	//reset buttons
 	recording = 0;
