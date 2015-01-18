@@ -1,5 +1,8 @@
 <!--
-(C) 2015 Sravanti Tekumalla, Alison Boreiko, and Brian Pilchik
+(c) 2015 Sravanti Tekumalla, Alison Boreiko, and Brian Pilchik
+Select icons provided by:
++ Glyphicons, http://glyphicons.com/
++ TukTuk Design, from The Noun Project
 -->
 
 <!DOCTYPE html>
@@ -56,28 +59,54 @@
 
     <div class="container">
 
-      <div class="starter-template">
+      <div id="content-welcome" class="starter-template">
         <h1>UVisa</h1>
         <p class="lead">
-          Please enter your name and password to continue.
+          Please enter your name and ID to continue.
           <br>
-          <span class="alt-language">Por favor escriba su nombre y contraseña para continuar.</span>
+          <span class="alt-language">Por favor escriba su nombre y ID para continuar.</span>
         </p>
         <form class="form-signin">
-          <label for="inputEmail" class="sr-only">Name</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Name / Nombre" required autofocus>
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password / Contraseña" required>
-          <div class="checkbox">
+          <label for="inputName" class="sr-only">Name</label>
+          <input type="text" id="inputName" class="form-control" placeholder="Name / Nombre" required autofocus>
+          <p></p>
+          <label for="inputID" class="sr-only">Password</label>
+          <input type="tex" id="inputID" class="form-control" placeholder="ID Number / Numero" required>
+<!--           <div class="checkbox">
             <label>
               <input type="checkbox" value="remember-me"> Remember me
             </label>
-          </div>
+          </div> -->
+          <p></p>
           <p>
-            <button class="btn btn-lg btn-primary" type="submit-en">English</button>
-            <button class="btn btn-lg btn-warning" type="submit-es">Español</button>
+            <button class="btn btn-lg btn-primary" type="submit" onclick="beginInterview('English')">English</button>
+            <button class="btn btn-lg btn-warning" type="submit" onclick="beginInterview('Spanish')">Español</button>
           </p>
         </form>
+      </div>
+
+      <div id="content-prompt-english" class="starter-template">
+        <h1>1. Introduction</h1>
+        <div class="col-md-6 col-md-offset-3">
+          <div id="video-wrapper" class="well">
+            <div class="embed-responsive embed-responsive-4by3">
+              <iframe id="video-frame" class="embed-responsive-item" src=""></iframe>
+            </div>
+          </div>
+          <div>
+              <button class="btn btn-lg btn-default col-md-offset-0" type="submit" onclick=""><span class="glyphicon glyphicon-chevron-left"></span></button>
+              <!-- <button class="btn btn-lg btn-success" type="submit" onclick=""><span class="glyphicon glyphicon-bullhorn"></span></button> -->
+              <button id="recording-button" class="btn btn-lg btn-default col-md-offset-3" type="submit" onclick="toggleAudio()"><span class="glyphicon glyphicon-record"></span></button>
+              <!-- <button class="btn btn-lg btn-success" type="submit" onclick=""><span class="glyphicon glyphicon-pencil"></span></button> -->
+              <button id="next-button" class="btn btn-lg btn-default col-md-offset-3" type="submit" onclick="nextVideo()"><span class="glyphicon glyphicon-chevron-right"></span></button>
+              <!-- <button class="btn btn-lg btn-danger" type="submit" onclick=""><span class="glyphicon glyphicon-exclamation-sign"></span></button> -->
+          </div>
+          <div>
+            <p>
+              [text box]
+            </p>
+          </div>
+        </div>
       </div>
 
     </div><!-- /.container -->
@@ -90,5 +119,6 @@
     <script src="../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="interview.js"></script>
   </body>
 </html>
