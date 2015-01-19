@@ -2,6 +2,7 @@
 var language = "UNASSIGNED"; //"English" or "Spanish"
 var recording = 0; //0: waiting, 1: recording, 2: submitting
 var submitted = false;
+var loggedIn = false;
 var questionCounter = 0;
 var questionTitle = "Question Title";
 var questionURL = "http://www.youtube.com/embed/fgxuM8DH6k8";
@@ -12,6 +13,7 @@ document.getElementById("content-prompt-english").style.display = "none";
 
 //after user first logs in, show next prompt
 function beginInterview(userLang) {
+	loggedIn = true;
 	language = userLang;
 	var userName = document.getElementById("inputName").value;
 	var userID = document.getElementById("inputID").value;
@@ -62,16 +64,23 @@ function nextVideo() {
 	//reset notes box
 	document.getElementById("notes-box").value = "";
 
-	//display next video
-	getNextQuestion();
-	document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
-	document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
-
 	//reset buttons
 	recording = 0;
 	document.getElementById("recording-button").className = "btn btn-lg btn-default col-md-offset-3";
 	document.getElementById("recording-icon").className = "glyphicon glyphicon-record";
 	document.getElementById("next-button").className = "btn btn-lg btn-default col-md-offset-3";
+
+	//display next video
+	getNextQuestion();
+	if (questionURL !== undefined) {
+		document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
+		document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
+	} else { //display goodbye screen
+		loggedIn = false;
+		document.getElementById("video-frame").src = "";
+		document.getElementById("content-prompt-english").style.display = "none";
+		document.getElementById("content-goodbye").style.display = "block";
+	}
 }
 
 //upload files to database
@@ -104,10 +113,14 @@ function getNextQuestion() {
 
 //switch to emergency video and disable user inputs
 $("#emergency").click(function() {
-	document.getElementById("video-frame").src = emergencyURL + '?rel=0&autoplay=1';
-	document.getElementById("userButtons").style.display = "none";
-	document.getElementById("userNotes").style.display = "none";
-	document.getElementById("emergencyButtons").style.display = "block";
+	if (loggedIn == true) {
+		document.getElementById("video-frame").src = emergencyURL + '?rel=0&autoplay=1';
+		document.getElementById("userButtons").style.display = "none";
+		document.getElementById("userNotes").style.display = "none";
+		document.getElementById("emergencyButtons").style.display = "block";
+	} else {
+		alert("Please sign in to use this feature.");
+	}
 });
 
 //return to previous video and enable user inputs
