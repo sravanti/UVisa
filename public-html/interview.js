@@ -1,23 +1,31 @@
 //Global Variables
-var language = "UNASSIGNED";
-var recording = 0;
+var language = "UNASSIGNED"; //"English" or "Spanish"
+var recording = 0; //0: waiting, 1: recording, 2: submitting
 var submitted = false;
+var questionCounter = 0;
+var questionTitle = "Question Title";
+var questionURL = "http://www.youtube.com/embed/fgxuM8DH6k8";
 
 //Initialization
-// document.getElementById("content-prompt").style.display = "none";
+document.getElementById("content-prompt-english").style.display = "none";
 
 //after user first logs in, show next prompt
 function beginInterview(userLang) {
 	language = userLang;
-	// alert(language);
-	// document.getElementById("content-wrapper").innerHTML = '<p>You\'ve chosen: ' + language + '.</p>';
-	// document.getElementById("content-wrapper").innerHTML = '<div class="embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" src="http://www.youtube.com/embed/eGilvHv0_bE?rel=0&autoplay=1"></iframe></div>';
+	var userName = document.getElementById("inputName").value;
+	var userID = document.getElementById("inputID").value;
+	console.log("name: " + userName);
+	console.log("ID: " + userID);
 
-	document.getElementById("content-welcome").style.display = "none";
-	document.getElementById("content-prompt-english").style.display = "block";
+	if ((userName !== "") && (userID !== "")) {
+		document.getElementById("content-welcome").style.display = "none";
+		document.getElementById("content-prompt-english").style.display = "block";
+
+		nextVideo();
+	}
 }
 
-//when user presses record button
+//toggles the record/success button
 function toggleAudio() {
 	if (recording ==1) { //capturing --> begin sending
 		recording = 2;
@@ -34,6 +42,7 @@ function toggleAudio() {
 	}
 }
 
+//change button after user accepts/denies permission to use microphone
 function recordButton(userChoice) {
 	if (userChoice == "allow") {
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-record blink";
@@ -42,7 +51,7 @@ function recordButton(userChoice) {
 	}
 }
 
-//when a new video prompt needs to be inserted and played
+//reset buttons and play next video prompt
 function nextVideo() {
 	//submit data if user didn't yet
 	if (submitted == false) {
@@ -53,7 +62,9 @@ function nextVideo() {
 	document.getElementById("notes-box").value = "";
 
 	//display next video
-	document.getElementById("video-frame").src = 'http://www.youtube.com/embed/fgxuM8DH6k8' + '?rel=0&autoplay=1';
+	getNextQuestion();
+	document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
+	document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
 
 	//reset buttons
 	recording = 0;
@@ -67,7 +78,21 @@ function submitData() {
 	submitted = true;
 
 	//send text, audio, transcript
+}
 
+//get next question details from databse
+function getNextQuestion() {
+	//send <questionCounter> to database
+	//database returns:
+		//next question number
+		//next question title
+		//next question URL
 
+	//SIMULATION OF DATABASE:
+	var titles = ["Introduction", "How are you?", "What happened?"];
+	var URLs = ["http://www.youtube.com/embed/fgxuM8DH6k8", "http://www.youtube.com/embed/fgxuM8DH6k8", "http://www.youtube.com/embed/fgxuM8DH6k8"];
 
+	questionTitle = titles[questionCounter];
+	questionURL = URLs[questionCounter];
+	questionCounter = questionCounter + 1;
 }

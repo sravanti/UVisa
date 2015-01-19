@@ -15,7 +15,7 @@ Select icons provided by:
     <meta name="author" content="">
     <link rel="icon" href="../favicon.ico">
 
-    <title>UVisa: Client Intake</title>
+    <title>ENTREVISTA: Client Intake</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -46,12 +46,14 @@ Select icons provided by:
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">UVisa</a>
+          <a class="navbar-brand" href="#">ENTREVISTA</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-            <li><a href="#help"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a></li>
+            <!-- <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li> -->
+            <li><a href="#about"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> About / Información</a></li>
+            <li><a href="#logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Log Out / Salir</a></li>
+            <li><a href="#emergency"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Emergency / Emergencia</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -60,7 +62,7 @@ Select icons provided by:
     <div class="container">
 
       <div id="content-welcome" class="starter-template">
-        <h1>UVisa</h1>
+        <h1>ENTRE<span class="alt-language">VIS</span>T<span class="alt-language">A</span></h1>
         <p class="lead">
           Please enter your name and ID to continue.
           <br>
@@ -71,11 +73,12 @@ Select icons provided by:
           <input type="text" id="inputName" class="form-control" placeholder="Name / Nombre" required autofocus>
           <p></p>
           <label for="inputID" class="sr-only">Password</label>
-          <input type="tex" id="inputID" class="form-control" placeholder="ID Number / Numero" required>
+          <input type="text" id="inputID" class="form-control" placeholder="ID Number / Numero" required>
+          <input type="text" style="display:none" required> <!-- awful hacky fix so Bootstrap can never try to submit a completed form -->
           <p></p>
           <p>
-            <button class="btn btn-lg btn-primary" type="submit" onclick="beginInterview('English')">English</button>
-            <button class="btn btn-lg btn-warning" type="submit" onclick="beginInterview('Spanish')">Español</button>
+            <button class="btn btn-lg btn-primary" onclick="beginInterview('English')">English</button>
+            <button class="btn btn-lg btn-warning" onclick="beginInterview('Spanish')">Español</button>
           </p>
         </form>
       </div>
@@ -83,13 +86,10 @@ Select icons provided by:
       <div id="content-prompt-english" class="starter-template no-margins">
 
         <!-- recording controls -->
-        <!-- <audio controls src="" id="audio"></audio> -->
-        <div style="margin:10px;">
-          <!-- <a class="button" id="record">Record</a> -->
-          <!-- <a class="button disabled one" id="stop">Reset</a> -->
-          <!-- <a class="button disabled one" id="play">Play</a> -->
-          <!-- <a class="button disabled one" id="download">Download</a> -->
-        </div>
+        <!-- <a class="button" id="record">Record</a> -->
+        <!-- <a class="button disabled one" id="stop">Reset</a> -->
+        <!-- <a class="button disabled one" id="play">Play</a> -->
+        <!-- <a class="button disabled one" id="download">Download</a> -->
         <!-- <input class="button" type="checkbox" id="live"/> -->
         <!-- <label for="live">Live Output</label> -->
 
@@ -114,7 +114,7 @@ Select icons provided by:
               </div>
             </div>
             <div class="col-md-1 col-md-offset-4">
-              <button id="next-button" class="btn btn-lg btn-default col-md-offset-3" type="submit" onclick="nextVideo()"><span class="glyphicon glyphicon-chevron-right"></span></button>
+              <a href="#"><button id="next-button" class="btn btn-lg btn-default col-md-offset-3" type="submit" onclick="nextVideo()"><span class="glyphicon glyphicon-chevron-right"></span></button></a>
             </div> 
           </div>
 
@@ -133,6 +133,12 @@ Select icons provided by:
     </div><!-- /.container -->
 
 
+    <!-- Recording scripts, credit to http://subinsb.com/html5-record-mic-voice -->
+    <script src="http://lab.subinsb.com/projects/jquery/core/jquery-2.1.1.js"></script>
+    <script src="cdn/recorder.js"></script>
+    <script src="cdn/jquery.voice.js"></script>
+    <script src="cdn/record.js"></script>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -144,10 +150,5 @@ Select icons provided by:
 
     <script type="text/javascript" src="interview.js"></script>
 
-    <!-- Recording scripts, credit to http://subinsb.com/html5-record-mic-voice -->
-    <script src="http://lab.subinsb.com/projects/jquery/core/jquery-2.1.1.js"></script>
-    <script src="cdn/recorder.js"></script>
-    <script src="cdn/jquery.voice.js"></script>
-    <script src="cdn/record.js"></script>
   </body>
 </html>
