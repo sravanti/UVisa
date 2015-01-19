@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from visas.forms import *
+from visas.models import *
 
 """
 Register / login / logout
@@ -28,16 +29,25 @@ def register(request):
 def user_login(request):
    if request.method == 'POST':
         username = request.POST['username']
+        print 'username: ' + username
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return redirect('/')
-            # TODO: Redirect to a success page.
+            form = Form.objects.get(user=user)
+            question_num = form.last_completed()
+            print 'question num: ' + str(question_num)
+            return render(request, 'visas/form.html', 
+                    {'question_num': question_num})
         else:
-            return redirect('/')
-            # TODO: Return a 'disabled account' error message
-    
+            # need to create a new account
+            register(request)
+            question_num = 0
+            return render(request, 'visas/form.html', 
+                        {'question_num': question_num})
+   else: 
+        return render(request,'visas/index.html')
+
 
 def user_logout(request):
     logout(request)
@@ -54,13 +64,14 @@ def load_form(request):
            return redirect('/')
     else:
         form = Form.objects.get(user=user)
-        first_unanswered = form.is_complete
+        question_num = form.is_complete
     return render(request, 'visas/form.html', 
                 {'questions': form.questions,
                 'answers': form.answers,
-                'first_unanswered': first_unanswered})
+                'question_num': first_unanswered})
 
-
+def get_next_question(request, num):
+    pass
 
 
 

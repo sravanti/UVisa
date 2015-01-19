@@ -9,18 +9,26 @@
           <br>
           <span class="alt-language">Por favor escriba su nombre y contraseña para continuar.</span>
         </p>
-        <form class="form-signin">
+        <form class="form-signin" method="post" action="/visas/login/">
+            {% csrf_token %}
           <label for="inputEmail" class="sr-only">Name</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Name / Nombre" required autofocus>
+          <input type="username" name="username" id="inputEmail" class="form-control" placeholder="Name / Nombre" required autofocus>
           <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password / Contraseña" required>
+          <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password / Contraseña" required>
           <div class="checkbox">
+            <!--
             <label>
               <input type="checkbox" value="remember-me"> Remember me
             </label>
+            -->
           </div>
           <p>
-            <button class="btn btn-lg btn-primary" type="submit-en">English</button>
+            <input href="/visas/login/" type="submit" class="btn btn-lg btn-primary">
+             </input>
+            <!--
+            <button class="btn btn-lg btn-primary">
+                <input type="submit" href="/visas/login"
+value="English"></button> -->
             <button class="btn btn-lg btn-warning" type="submit-es">Español</button>
           </p>
         </form>
