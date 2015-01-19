@@ -5,6 +5,7 @@ var submitted = false;
 var questionCounter = 0;
 var questionTitle = "Question Title";
 var questionURL = "http://www.youtube.com/embed/fgxuM8DH6k8";
+var emergencyURL = "http://www.youtube.com/embed/DDY346OQCDo";
 
 //Initialization
 document.getElementById("content-prompt-english").style.display = "none";
@@ -96,3 +97,23 @@ function getNextQuestion() {
 	questionURL = URLs[questionCounter];
 	questionCounter = questionCounter + 1;
 }
+
+// function emergency() {
+
+// }
+
+//switch to emergency video and disable user inputs
+$("#emergency").click(function() {
+	document.getElementById("video-frame").src = emergencyURL + '?rel=0&autoplay=1';
+	document.getElementById("userButtons").style.display = "none";
+	document.getElementById("userNotes").style.display = "none";
+	document.getElementById("emergencyButtons").style.display = "block";
+});
+
+//return to previous video and enable user inputs
+$("#emergencyResume").click(function() {
+	document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
+	document.getElementById("userButtons").style.display = "block";
+	document.getElementById("userNotes").style.display = "block";
+	document.getElementById("emergencyButtons").style.display = "none";
+});
