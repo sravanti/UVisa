@@ -34,6 +34,8 @@
 					$.voice.initCalled = true;
 				}
 				navigator.getUserMedia({audio: true}, function(stream){
+					//Microphone input allowed!
+					recordButton("allow"); //from interview.js
 					var input = $.voice.context.createMediaStreamSource(stream);
 					if(output === true){
 						input.connect($.voice.context.destination);
@@ -45,7 +47,8 @@
 					$.voice.recorder.record();
 					callback(stream);
 				}, function() {
-					alert('No live audio input');
+					alert('We could not access your microphone. Please check permissions.');
+					recordButton("deny"); //from interview.js 
 				});
 			},
 			stop: function(){
@@ -60,6 +63,9 @@
 						callback(blob);
 					}else if(type == "URL"){
 						var url = URL.createObjectURL(blob);
+						//oh hey, we have a Blob! Now might be a good time to send it to the server...?
+						console.log("Blob type: " + blob.type);
+						console.log("Blob size: " + blob.size);
 						callback(url);
 					}
 				});

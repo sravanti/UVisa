@@ -20,7 +20,7 @@ $(document).ready(function(){
 	});
 	$(document).on("click", "#download:not(.disabled)", function(){
 		$.voice.export(function(url){
-			alert(url);
+			console.log("Blob URL:" + url);
 			$("<a href='"+url+"' download='MyRecording.wav'></a>")[0].click();
 		}, "URL");
 		restore();
