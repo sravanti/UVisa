@@ -13,7 +13,6 @@ var questionCounter = 0;
 var questionTitle = "Question Title";
 var questionURL = "http://www.youtube.com/embed/fgxuM8DH6k8";
 var questionLogic = false; //true when question requires YES/NO answer
-
 var questionBack = []; //index = this question, value = the previous question (how we got here)
 
 //Emergency Video
@@ -151,6 +150,14 @@ function submitData() {
 	//send text, audio, transcript
 }
 
+function setEndIcon() {
+	if (questionTree[questionCounter]["next"] == -1) {
+		document.getElementById("next-button").innerHTML = "<span class='glyphicon glyphicon-share'></span>";
+	} else {
+		document.getElementById("next-button").innerHTML = "<span class='glyphicon glyphicon-chevron-right'></span>";
+	}
+}
+
 //================================================================================
 // EMERGENCY VIDEO
 //================================================================================
@@ -273,20 +280,5 @@ function loadVideo(questionNumber) {
 		questionBack[questionNumber] = questionCounter; //track how we got here
 		questionCounter = questionNumber;
 		return(true);
-	}
-}
-
-
-
-
-
-
-
-
-function setEndIcon() {
-	if (questionTree[questionCounter]["next"] == -1) {
-		document.getElementById("next-button").innerHTML = "<span class='glyphicon glyphicon-share'></span>";
-	} else {
-		document.getElementById("next-button").innerHTML = "<span class='glyphicon glyphicon-chevron-right'></span>";
 	}
 }
