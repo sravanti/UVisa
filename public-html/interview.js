@@ -132,14 +132,6 @@ function displayButtons() {
 }
 
 function prevVideo() {
-	// if (questionCounter > 1) {
-	// 	resetVideoControls();
-	// 	questionCounter = questionCounter - 1; //this is silly. change the functions to not be next-biased.
-	// 	getNextQuestion();
-	// 	questionCounter = questionCounter - 1;
-	// 	document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
-	// 	document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
-	// }
 	goToQuestion(questionBack[questionCounter]);
 }
 
@@ -186,27 +178,9 @@ $("#emergencyResume").click(function() {
 //LOGIC CONTROLS
 //================================================================================
 
-var userAnswers = []; //user replies, indexed by question number
+//required include: questionTree.js
 
-//only include questions which require a logical branch (yes/no answer)
-var questionTree = { //logic branches, keyed by question number
-	0:{
-		"next":1,
-	},
-	1:{
-		"yes":2,
-		"no":3,
-	},
-	2:{
-		"next":4,
-	},
-	3:{
-		"next":4,
-	},
-	4:{
-		"next":-1, //-1 signals end of questions
-	},
-};
+var userAnswers = []; //user replies, indexed by question number
 
 //returns question number of next question in logic tree
 function getNextQuestion(currentQuestion) {
@@ -232,41 +206,11 @@ function answerLogic(currentAnswer) {
 	nextVideo();
 }
 
-//??? what about SECURITY of DATABASE
-//??? feature: visual to show when at end of test
-
-
 //================================================================================
 //VIDEO DATA
 //================================================================================
 
-var videoData = { //keyed by question number
-	0:{
-		"title":"Introduction",
-		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
-		"logic":false,
-	},
-	1:{
-		"title":"One",
-		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
-		"logic":true,
-	},
-	2:{
-		"title":"Yes on #1",
-		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
-		"logic":false,
-	},
-	3:{
-		"title":"No on #1",
-		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
-		"logic":false,
-	},
-	4:{
-		"title":"Four",
-		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
-		"logic":false,
-	},
-};
+//required include: videoData.js
 
 //sets global variables for displaying video/title
 //returns false if there are no more videos to display
