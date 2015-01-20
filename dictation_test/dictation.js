@@ -54,8 +54,8 @@ function save() {
 
 function updateLang(sel) {
     var value = sel.options[sel.selectedIndex].value;
-    //speech.lang = getLang(value);
-    speech.lang = getLang(0);
+    speech.lang = getLang(value);
+    //speech.lang = getLang(0);
     localStorage["language"] = value;
 }
 
@@ -74,8 +74,8 @@ function initialize() {
     speech.continuous = true;
     speech.maxAlternatives = 5;
     speech.interimResults = true;
-    //speech.lang = getLang(localStorage["language"]);
-    speech.lang = getLang(0);
+    speech.lang = getLang(localStorage["language"]);
+    //speech.lang = getLang(0);
     speech.onend = reset;
 }
 
