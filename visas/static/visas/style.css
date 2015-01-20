@@ -15,8 +15,34 @@ h1 {
 .alt-language {
 	color: #F0AD4E;
 }
+.no-margins {
+  margin: 0;
+  padding: 0;
+}
 
-/* FORM */
+
+/* BLINK EFFECT by bkellgren of StackOverflow */
+.blink {
+  -webkit-animation: blink 1s steps(5, start) infinite;
+  -moz-animation:    blink 1s steps(5, start) infinite;
+  -o-animation:      blink 1s steps(5, start) infinite; 
+  animation:         blink 1s steps(5, start) infinite;
+}
+
+@-webkit-keyframes blink {
+  to { visibility: hidden; }
+}
+@-moz-keyframes blink {
+  to { visibility: hidden; }
+}
+@-o-keyframes blink {
+  to { visibility: hidden; }
+}
+@keyframes blink {
+  to { visibility: hidden; }
+}
+
+/* SIGNIN FORM */
 .form-signin {
   max-width: 330px;
   padding: 15px;
