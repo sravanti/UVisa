@@ -78,7 +78,7 @@ def load_form(request):
 def get_next_question(request, num):
     return Question.objects.get(id=num+1)
 
-@require_http_methods(['POST]')
+@require_http_methods(['POST'])
 @csrf_exempt
 def process_answer(request):
     form = Form.objects.get(user=request.user)
