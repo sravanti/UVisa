@@ -1,9 +1,6 @@
-from visas.models import *
-from django.db.models import Count
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import ModelForm
-from django.contrib import admin
 
 """
 User registration
@@ -12,16 +9,13 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+"""
+Q & A 
 """
 class FormForm(forms.Form):
-    questions = Question.objects.all()
-    answers = []
-    for i in range(len(questions)):
-         answers.append(forms.CharField())
+    question = forms.CharField(widget=forms.TextInput(attrs={'readonly':'readonly'}),
+                required=False)
+    answer_text =  forms.CharField(required=False)
+    answer_recording = forms.FileField(required=False)
 
-
-class FormAdmin(admin.ModelAdmin):
-    class Meta:
-        model = Form
-        fields = ('question_set', 'answer_set')
-"""

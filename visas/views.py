@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
@@ -63,24 +63,27 @@ Form submission
 """
 def load_form(request):
     user = request.user
-    if request.method == 'POST':
-        form = FormForm(request.POST)
-        if form.is_valid():
-           return redirect('/')
-    else:
-        form = Form.objects.get(user=user)
-        question_num = int(form.last_completed())
-        print 'question_num: ' + str(question_num)
-        question = Question.objects.get(id=question_num)
-        print 'question text: ' + question.question_eng
-        form = FormForm(initial={'question': question.question_eng})
+    form = Form.objects.get(user=user)
+    question_num = str(form.last_completed())
+    print 'question_num: ' + question_num
+    question = Question.objects.get(id=question_num)
+    print 'question text: ' + question.question_eng
+    form = FormForm(initial={'question': question.question_eng})
     return render(request, 'visas/form.html', 
-                {'form': form,
-                'question_num': question_num})
+                {'form': form,})
+                #'question_num': question_num})
 
 def get_next_question(request, num):
     return Question.objects.get(id=num+1)
 
-
-
+def process_answer(request):
+    if request.method == 'POST':
+        user = request.user
+        form = Form.objects.get(user=user)
+        form_data = FormForm(request.POST)
+        answer_text = form_data.cleaned_data['answer_text']
+        question_num = form_data.question_num
+        form.answers[question_num-1].answer_text = answer_text
+        print answers[question_num-1].answer_text
+    
  

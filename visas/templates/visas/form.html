@@ -1,9 +1,10 @@
-
+{% extends 'visas/base.html' %}
+{% block content %}
 <form action="" method="post">
+     <input type="hidden" name="question_num" value= {{question_num}} />
     {% csrf_token %}
-    {% for question in questions %}
-        {{ question.question_eng }}
-       <h4> This should be an answer box </h4>
-    {% endfor %}
-    <input type="submit" value="Submit" />
+       <h1> Question: </h1>
+    {{ form.as_table }}
+    <input type="submit" href="/visas/submit" value="submit" />
 </form>
+{% endblock %}
