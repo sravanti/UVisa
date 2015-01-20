@@ -14,9 +14,9 @@
         
 <body>
 <div class="notepad"> 
-  <div class="notepad-heading"> 
-    <h1>Online Dictation</h1> 
-  </div>
+  <!-- <div class="notepad-heading">  -->
+    <!-- <h1>Online Dictation</h1>  -->
+  <!-- </div> -->
   <div id="speech"> 
     <span id="labnol" contenteditable="true">Click the Start button and dicatate.</span> 
     <span id="notfinal"></span> 
@@ -25,7 +25,7 @@
   <div class="whatisthis"> 
     <span id="messages"> 
       <a href="#" onclick="javascript:action();return false;" id="btn">Loading..</a> 
-      <!-- <a href="#" onclick="javascript:clearSlate();return false;" id="btnClear">Clear</a> -->
+      <a href="#" onclick="javascript:clearSlate();return false;" id="btnClear">Clear</a>
       <a href="#" onclick="javascript:save();return false;" id="btnClear" title="Store your file in the cloud">Export</a>       
     <img id="status" src="listen.gif" />
     </span> 
@@ -33,7 +33,7 @@
 </div>
 
     <div class="platforms"> 
-<span class="language"><select name="lang" id="lang" onchange="updateLang(this)"><optgroup label="English"><option value="6">Australia</option><option value="7">Canada</option><option value="8">India</option><option value="9">New Zealand</option><option value="10">South Africa</option><option value="11">United Kingdom</option><option value="12">United States</option></optgroup><optgroup label="--"><option value="0">Afrikaans</option><option value="1">Bahasa Indonesia</option><option value="2">Bahasa Melayu</option><option value="3">Català</option><option value="4">Čeština</option><option value="5">Deutsch</option><option value="33">Euskara</option><option value="34">Français</option><option value="35">Galego</option><option value="36">IsiZulu</option><option value="37">Íslenska</option><option value="40">Magyar</option><option value="41">Nederlands</option><option value="42">Polski</option><option value="45">Română</option><option value="46">Slovenčina</option><option value="47">Suomi</option><option value="48">Svenska</option><option value="49">Türkçe</option><option value="50">български</option><option value="51">Pусский</option><option value="52">Српски</option><option value="53">íêì</option><option value="58">ææè</option><option value="59">Lingua latīna</option></optgroup><optgroup label="Español"><option value="13">Argentina</option><option value="14">Bolivia</option><option value="15">Chile</option><option value="16">Colombia</option><option value="17">Costa Rica</option><option value="18">Ecuador</option><option value="19">El Salvador</option><option value="20">España</option><option value="21">Estados Unidos</option><option value="22">Guatemala</option><option value="23">Honduras</option><option value="24">México</option><option value="25">Nicaragua</option><option value="26">Panamá</option><option value="27">Paraguay</option><option value="28">Perú</option><option value="29">Puerto Rico</option><option value="30">Rep. Dominicana</option><option value="31">Uruguay</option><option value="32">Venezuela</option></optgroup><optgroup label="Italiano"><option value="38">Italiano Italia</option><option value="39">Italiano Svizzera</option></optgroup><optgroup label="Português"><option value="43">Brasil</option><option value="44">Portugal</option></optgroup><optgroup label="äæ"><option value="54">æéè (äååé)</option><option value="55">æéè (éæ)</option><option value="56">äæ (åç)</option><option value="57">çè (éæ)</option></optgroup></select></span> </div>
+<span class="language"><select name="lang" id="lang" onchange="updateLang(this)"><option value="0">Guatemala</option><!--<optgroup label="English"><option value="6">Australia</option><option value="7">Canada</option><option value="8">India</option><option value="9">New Zealand</option><option value="10">South Africa</option><option value="11">United Kingdom</option><option value="12">United States</option></optgroup><optgroup label=""><option value="0">Afrikaans</option><option value="1">Bahasa Indonesia</option><option value="2">Bahasa Melayu</option><option value="3">Català</option><option value="4">Čeština</option><option value="5">Deutsch</option><option value="33">Euskara</option><option value="34">Français</option><option value="35">Galego</option><option value="36">IsiZulu</option><option value="37">Íslenska</option><option value="40">Magyar</option><option value="41">Nederlands</option><option value="42">Polski</option><option value="45">Română</option><option value="46">Slovenčina</option><option value="47">Suomi</option><option value="48">Svenska</option><option value="49">Türkçe</option><option value="50">български</option><option value="51">Pусский</option><option value="52">Српски</option><option value="53">íêì</option><option value="58">ææè</option><option value="59">Lingua latīna</option></optgroup><optgroup label="Español"><option value="13">Argentina</option><option value="14">Bolivia</option><option value="15">Chile</option><option value="16">Colombia</option><option value="17">Costa Rica</option><option value="18">Ecuador</option><option value="19">El Salvador</option><option value="20">España</option><option value="21">Estados Unidos</option><option value="22">Guatemala</option><option value="23">Honduras</option><option value="24">México</option><option value="25">Nicaragua</option><option value="26">Panamá</option><option value="27">Paraguay</option><option value="28">Perú</option><option value="29">Puerto Rico</option><option value="30">Rep. Dominicana</option><option value="31">Uruguay</option><option value="32">Venezuela</option></optgroup><optgroup label="Italiano"><option value="38">Italiano Italia</option><option value="39">Italiano Svizzera</option></optgroup><optgroup label="Português"><option value="43">Brasil</option><option value="44">Portugal</option></optgroup><optgroup label="äæ"><option value="54">æéè (äååé)</option><option value="55">æéè (éæ)</option><option value="56">äæ (åç)</option><option value="57">çè (éæ)</option></optgroup>--></select></span></div>
 
     <div id=fb-root></div>
 

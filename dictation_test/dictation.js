@@ -54,7 +54,8 @@ function save() {
 
 function updateLang(sel) {
     var value = sel.options[sel.selectedIndex].value;
-    speech.lang = getLang(value);
+    //speech.lang = getLang(value);
+    speech.lang = getLang(0);
     localStorage["language"] = value;
 }
 
@@ -73,8 +74,8 @@ function initialize() {
     speech.continuous = true;
     speech.maxAlternatives = 5;
     speech.interimResults = true;
-    speech.lang = getLang(localStorage["language"]);
-    //    speech.lang = getLang(22);
+    //speech.lang = getLang(localStorage["language"]);
+    speech.lang = getLang(0);
     speech.onend = reset;
 }
 
@@ -88,7 +89,7 @@ if (typeof(webkitSpeechRecognition) !== 'function') {
 } else {
 
     if (typeof(localStorage["language"]) == 'undefined') {
-        localStorage["language"] = 12;
+        localStorage["language"] = 0;
     }
 
     if (typeof(localStorage["transcript"]) == 'undefined') {
@@ -146,7 +147,7 @@ if (typeof(webkitSpeechRecognition) !== 'function') {
 
 function getLang(opt) {
     var langs = [
-		 ["Afrikaans", "af-za", "--", "en-us"],
+		 /*["Afrikaans", "af-za", "--", "en-us"],
 		 ["Bahasa Indonesia", "id-id", "--", "id-id"],
 		 ["Bahasa Melayu", "ms-my", "--", "ms-my"],
 		 ["CatalÃ ", "ca-es", "--", "ca-es"],
@@ -167,9 +168,9 @@ function getLang(opt) {
 		 ["Ecuador", "es-ec", "EspaÃ±ol", "es-419"],
 		 ["El Salvador", "es-sv", "EspaÃ±ol", "es-419"],
 		 ["EspaÃ±a", "es-es", "EspaÃ±ol", "es"],
-		 ["Estados Unidos", "es-us", "EspaÃ±ol", "es-419"],
+		 ["Estados Unidos", "es-us", "EspaÃ±ol", "es-419"],*/
         //index 22
-		 ["Guatemala", "es-gt", "EspaÃ±ol", "es-419"],
+		 ["Guatemala", "es-gt", "EspaÃ±ol", "es-419"]/*,
 		 ["Honduras", "es-hn", "EspaÃ±ol", "es-419"],
 		 ["MÃ©xico", "es-mx", "EspaÃ±ol", "es-419"],
 		 ["Nicaragua", "es-ni", "EspaÃ±ol", "es-419"],
@@ -207,7 +208,7 @@ function getLang(opt) {
 		 ["ç²µèªž (é¦™æ¸¯)", "yue-hant-hk", "ä¸­æ–‡", "zh-cn"],
 		 ["æ—¥æœ¬èªž", "ja-jp", "--", "ja"],
 		 ["Lingua latÄ«na", "la", "--", "es-419"]
-		 ];
+		 ]*/;
     return langs[opt][1];
 }
 
