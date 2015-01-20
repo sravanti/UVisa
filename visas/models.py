@@ -13,7 +13,7 @@ class Question(models.Model):
     question_eng = models.CharField(max_length=255, blank=True, null=True)
     question_esp = models.CharField(max_length=255, blank=True, null=True)
     link = models.URLField(max_length=255, blank=True, null=True)
- 
+
     def __unicode__(self):
         return self.question_eng
 
@@ -21,7 +21,7 @@ class Form(models.Model):
     #temporarily making all questions in the form by default
     questions = Question.objects.all()
     answers = []
-    for i in range(len(questions)):
+    for i in enumerate(questions):
         answers.append(Answer())
 
     #question_set = models.ManyToManyField(Question)
@@ -33,9 +33,9 @@ class Form(models.Model):
     def last_completed(self):
         print 'len answers: '  + str(len(self.answers))
         for i in range(len(self.answers)):
-            if (len(answers[i].answer_text) == 0 and
-                len(answers[i].transcription) == 0 and
-                answers[i].audio is None):
-                    print 'answer' + str(i)
-                    return i
+            if not (self.answers[i].answer_text and
+               self.answers[i].transcription and
+               self.answers[i].audio):
+                    print 'answer:' + str(i)
+                    return i+1
         return len(self.answers)

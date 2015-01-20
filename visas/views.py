@@ -4,6 +4,8 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from visas.forms import *
 from visas.models import *
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 """
 Register / login / logout
@@ -34,11 +36,13 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
+            """
             form = Form.objects.get(user=user)
             question_num = form.last_completed()
             print 'question num: ' + str(question_num)
-            return render(request, 'visas/form.html', 
-                    {'question_num': question_num})
+            return (request, 'visas/form.html')
+            """
+            return HttpResponseRedirect(reverse('form'))
         else:
             # need to create a new account
             register(request)
@@ -65,10 +69,13 @@ def load_form(request):
            return redirect('/')
     else:
         form = Form.objects.get(user=user)
-        question_num = form.last_completed
+        question_num = int(form.last_completed())
+        print 'question_num: ' + str(question_num)
+        question = Question.objects.get(id=question_num)
+        print 'question text: ' + question.question_eng
+        form = FormForm(initial={'question': question.question_eng})
     return render(request, 'visas/form.html', 
-                {'questions': form.questions,
-                'answers': form.answers,
+                {'form': form,
                 'question_num': question_num})
 
 def get_next_question(request, num):
