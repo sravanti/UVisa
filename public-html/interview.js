@@ -129,6 +129,7 @@ function displayButtons() {
 		document.getElementById("userNotes").style.display = "block";
 		document.getElementById("logicButtons").style.display = "none";
 	}
+	setEndIcon();
 }
 
 function prevVideo() {
@@ -225,6 +226,7 @@ function answerLogic(currentAnswer) {
 }
 
 //??? what about SECURITY of DATABASE
+//??? feature: visual to show when at end of test
 
 
 //================================================================================
@@ -271,5 +273,20 @@ function loadVideo(questionNumber) {
 		questionBack[questionNumber] = questionCounter; //track how we got here
 		questionCounter = questionNumber;
 		return(true);
+	}
+}
+
+
+
+
+
+
+
+
+function setEndIcon() {
+	if (questionTree[questionCounter]["next"] == -1) {
+		document.getElementById("next-button").innerHTML = "<span class='glyphicon glyphicon-share'></span>";
+	} else {
+		document.getElementById("next-button").innerHTML = "<span class='glyphicon glyphicon-chevron-right'></span>";
 	}
 }
