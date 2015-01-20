@@ -63,6 +63,9 @@
 						callback(blob);
 					}else if(type == "URL"){
 						var url = URL.createObjectURL(blob);
+						//oh hey, we have a Blob! Now might be a good time to send it to the server...?
+						console.log("Blob type: " + blob.type);
+						console.log("Blob size: " + blob.size);
 						callback(url);
 					}
 				});

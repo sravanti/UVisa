@@ -100,8 +100,8 @@ Select icons provided by:
           <input type="text" style="display:none" required> <!-- awful hacky fix so Bootstrap can never try to submit a completed form -->
           <p></p>
           <p>
-            <button class="btn btn-lg btn-primary" onclick="beginInterview('English')">English</button>
-            <button class="btn btn-lg btn-warning" onclick="beginInterview('Spanish')">Español</button>
+            <button class="btn btn-lg btn-primary" onclick="beginInterview('English')">Log In</button>
+            <button class="btn btn-lg btn-warning" onclick="beginInterview('Spanish')">Iniciar Sesión</button>
           </p>
         </form>
       </div>
@@ -127,7 +127,7 @@ Select icons provided by:
           <!-- standard buttons -->
           <div class="row" id="userButtons">
             <div class="col-md-1">
-              <button class="btn btn-lg btn-default col-md-offset-0" type="submit" onclick=""><span class="glyphicon glyphicon-chevron-left"></span></button>
+              <button class="btn btn-lg btn-default col-md-offset-0" type="submit" onclick="prevVideo()"><span class="glyphicon glyphicon-chevron-left"></span></button>
             </div>
             <div class="col-md-1 col-md-offset-4">
               <div id="record">
@@ -145,6 +145,16 @@ Select icons provided by:
           <div class="row" id="emergencyButtons" style="display:none">
             <div class="col-md-1 col-md-offset-5">
               <button class="btn btn-lg btn-default" id="emergencyResume"><span class="glyphicon glyphicon-share-alt"></span></button>
+            </div>
+          </div>
+
+          <!-- logic buttons -->
+          <div class="row" id="logicButtons" style="display:none">
+            <div class="col-md-1 col-md-offset-3">
+              <button class="btn btn-lg btn-default" onclick="answerLogic('yes')">Yes</button>
+            </div>
+            <div class="col-md-1 col-md-offset-3">
+              <button class="btn btn-lg btn-default" onclick="answerLogic('no')">No</button>
             </div>
           </div>
 
