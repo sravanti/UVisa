@@ -1,15 +1,27 @@
-//Global Variables
+//================================================================================
+//GLOBAL VARIABLES
+//================================================================================
+
+//General
 var language = "UNASSIGNED"; //"English" or "Spanish"
 var recording = 0; //0: waiting, 1: recording, 2: submitting
 var submitted = false;
 var loggedIn = false;
 
+//Current Question/Video Settings
 var questionCounter = 0;
 var questionTitle = "Question Title";
 var questionURL = "http://www.youtube.com/embed/fgxuM8DH6k8";
 var questionLogic = false; //true when question requires YES/NO answer
 
+var questionBack = []; //index = this question, value = the previous question (how we got here)
+
+//Emergency Video
 var emergencyURL = "http://www.youtube.com/embed/DDY346OQCDo";
+
+//================================================================================
+// MAIN
+//================================================================================
 
 //Initialization
 document.getElementById("content-prompt-english").style.display = "none";
@@ -31,9 +43,18 @@ function beginInterview(userLang) {
 		document.getElementById("content-welcome").style.display = "none";
 		document.getElementById("content-prompt-english").style.display = "block";
 
-		//display next video
-		nextVideo();
+		//display first video
+		goToQuestion(0); //first video
 	}
+}
+
+//for playing a particular video based on known question number
+function goToQuestion(num) {
+		resetVideoControls();
+		loadVideo(num);
+		displayButtons();
+		document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
+		document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';	
 }
 
 //toggles the record/success button
@@ -68,7 +89,6 @@ function nextVideo() {
 
 	//display next video
 	var videoLoaded = loadVideo(getNextQuestion(questionCounter));
-//	getNextQuestion();
 
 	displayButtons();
 
@@ -111,16 +131,17 @@ function displayButtons() {
 	}
 }
 
-// function prevVideo() {
-// 	if (questionCounter > 1) {
-// 		resetVideoControls();
-// 		questionCounter = questionCounter - 1; //this is silly. change the functions to not be next-biased.
-// 		getNextQuestion();
-// 		questionCounter = questionCounter - 1;
-// 		document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
-// 		document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
-// 	}
-// }
+function prevVideo() {
+	// if (questionCounter > 1) {
+	// 	resetVideoControls();
+	// 	questionCounter = questionCounter - 1; //this is silly. change the functions to not be next-biased.
+	// 	getNextQuestion();
+	// 	questionCounter = questionCounter - 1;
+	// 	document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
+	// 	document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
+	// }
+	goToQuestion(questionBack[questionCounter]);
+}
 
 //upload files to database
 function submitData() {
@@ -203,8 +224,8 @@ function answerLogic(currentAnswer) {
 	nextVideo();
 }
 
-//??? what about PREVIOUS question button?
 //??? what about SECURITY of DATABASE
+
 
 //================================================================================
 //VIDEO DATA
@@ -217,17 +238,22 @@ var videoData = { //keyed by question number
 		"logic":false,
 	},
 	1:{
-		"title":"1",
+		"title":"One",
 		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
 		"logic":true,
 	},
 	2:{
-		"title":"2",
+		"title":"Yes on #1",
 		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
 		"logic":false,
 	},
 	3:{
-		"title":"3",
+		"title":"No on #1",
+		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
+		"logic":false,
+	},
+	4:{
+		"title":"Four",
 		"url":"http://www.youtube.com/embed/fgxuM8DH6k8",
 		"logic":false,
 	},
@@ -242,6 +268,7 @@ function loadVideo(questionNumber) {
 		questionTitle = videoData[questionNumber]["title"];
 		questionURL = videoData[questionNumber]["url"];
 		questionLogic = videoData[questionNumber]["logic"];
+		questionBack[questionNumber] = questionCounter; //track how we got here
 		questionCounter = questionNumber;
 		return(true);
 	}
