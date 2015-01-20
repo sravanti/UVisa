@@ -42,9 +42,10 @@ def user_login(request):
         else:
             # need to create a new account
             register(request)
-            question_num = 0
+            question_num = 1
+            print str(Question.objects.get(id=question_num))
             return render(request, 'visas/form.html', 
-                        {'question_num': question_num})
+                        {'question_num': Question.objects.get(id=question_num)})
    else: 
         return render(request,'visas/index.html')
 
@@ -64,14 +65,14 @@ def load_form(request):
            return redirect('/')
     else:
         form = Form.objects.get(user=user)
-        question_num = form.is_complete
+        question_num = form.last_completed
     return render(request, 'visas/form.html', 
                 {'questions': form.questions,
                 'answers': form.answers,
-                'question_num': first_unanswered})
+                'question_num': question_num})
 
 def get_next_question(request, num):
-    pass
+    return Question.objects.get(id=num+1)
 
 
 
