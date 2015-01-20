@@ -1,3 +1,9 @@
+/*
+Outstanding concerns:
+[ ] is the database secure? can people upload malicious files?
+[ ] SSL would help us save ALLOW/DENY pref. for microphone
+*/
+
 //================================================================================
 //GLOBAL VARIABLES
 //================================================================================
