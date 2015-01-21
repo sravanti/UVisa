@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+NUM_QUESTIONS = 50
+
 class Answer(models.Model):
     answer_text = models.TextField(blank=True, null=True)
     transcription = models.TextField(blank=True, null=True)
@@ -18,10 +20,8 @@ class Question(models.Model):
         return self.question_eng
 
 class Form(models.Model):
-    #temporarily making all questions in the form by default
-    questions = Question.objects.all()
     answers = []
-    for i in enumerate(questions):
+    for i in range(NUM_QUESTIONS):
         answers.append(Answer())
 
     #question_set = models.ManyToManyField(Question)
