@@ -41,7 +41,12 @@ $(document).ready(function() {
          type: 'POST',
          url: 'login/',
          data: {'username': username, 'password': password},
-         success: function(response){alert('yay');}
+         //success: function(data) {
+         //   beginInterview('English');
+         //   }
+        success: function(data, textStatus, request){
+        alert(data);
+        }
     });
 });
 });
