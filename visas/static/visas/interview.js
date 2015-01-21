@@ -34,7 +34,7 @@ document.getElementById("content-prompt-english").style.display = "none";
 //login
 $(document).ready(function() {
 
- $("#login").on("click", function() {
+$("#login").on("click", function() {
     var username = document.getElementById("inputName").value;
     var password  = document.getElementById("inputID").value;
     $.ajax({
@@ -173,6 +173,17 @@ function prevVideo() {
 //upload files to database
 function submitData() {
 	submitted = true;
+    $.ajax({
+         type: 'POST',
+         url: 'submit/',
+         data: {'text': 'answertext', 'username': 'text'},
+         //success: function(data) {
+         //   beginInterview('English');
+         //   }
+        success: function(data, textStatus, request){
+        alert(data);
+        }
+    });
 
 	//send text, audio, transcript
 }
