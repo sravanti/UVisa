@@ -21,6 +21,9 @@ var questionURL = "http://www.youtube.com/embed/fgxuM8DH6k8";
 var questionLogic = false; //true when question requires YES/NO answer
 var questionBack = []; //index = this question, value = the previous question (how we got here)
 
+var userName;
+var userID;
+
 //Emergency Video
 var emergencyURL = "http://www.youtube.com/embed/DDY346OQCDo";
 
@@ -55,8 +58,8 @@ $("#login").on("click", function() {
 function beginInterview(userLang) {
 	loggedIn = true;
 	language = userLang;
-	var userName = document.getElementById("inputName").value;
-	var userID = document.getElementById("inputID").value;
+	userName = document.getElementById("inputName").value;
+	userID = document.getElementById("inputID").value;
 	// console.log("name: " + userName);
 	// console.log("ID: " + userID);
 
@@ -173,10 +176,12 @@ function prevVideo() {
 //upload files to database
 function submitData() {
 	submitted = true;
+	var dataNote = document.getElementById("notes-box").value;
+
     $.ajax({
          type: 'POST',
          url: 'submit/',
-         data: {'text': 'answertext', 'username': 'text'},
+         data: {'text': dataNote, 'username': userName, 'password': userID, 'question': questionCounter},
          //success: function(data) {
          //   beginInterview('English');
          //   }
