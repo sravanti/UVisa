@@ -30,28 +30,30 @@ def register(request):
     else:
         user_form = UserForm()
 
+@csrf_exempt
 def user_login(request):
    if request.method == 'POST':
+        print 'logging in'
         username = request.POST['username']
         print 'username: ' + username
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        if user:
+        if user is not None:
+            print 'is user'
             login(request, user)
-            """
-            form = Form.objects.get(user=user)
-            question_num = form.last_completed()
-            print 'question num: ' + str(question_num)
-            return (request, 'visas/form.html')
-            """
+            if request.is_ajax():
+                return HttpResponse("")
             return HttpResponseRedirect(reverse('form'))
         else:
             # need to create a new account
             register(request)
             question_num = 1
             print str(Question.objects.get(id=question_num))
+            if request.is_ajax():
+                return HttpResponse("")
             return render(request, 'visas/form.html', 
                         {'question_num': Question.objects.get(id=question_num)})
+        
    else: 
         return render(request,'visas/index.html')
 

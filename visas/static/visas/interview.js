@@ -31,6 +31,21 @@ var emergencyURL = "http://www.youtube.com/embed/DDY346OQCDo";
 //Initialization
 document.getElementById("content-prompt-english").style.display = "none";
 
+//login
+$(document).ready(function() {
+
+ $("#login").on("click", function() {
+    var username = document.getElementById("inputName").value;
+    var password  = document.getElementById("inputID").value;
+    $.ajax({
+         type: 'POST',
+         url: 'login/',
+         data: {'username': username, 'password': password},
+         success: function(response){alert('yay');}
+    });
+});
+});
+
 //after user first logs in, show next prompt
 function beginInterview(userLang) {
 	loggedIn = true;
@@ -52,16 +67,16 @@ function beginInterview(userLang) {
 		goToQuestion(0); //first video
 	}
 }
-
+/*
 $(document).ready(function() {
 	$.ajax({
-		type: 'POST',
+		type: "POST",
 		url: 'login',
 		data: {'username': "BRIAN", 'password': "123"},
 		success: function(response){alert('yay');}
     });
 });
-
+*/
 //for playing a particular video based on known question number
 function goToQuestion(num) {
 		resetVideoControls();
