@@ -15,20 +15,10 @@ Register / login / logout
 def index(request):
     return render(request,'visas/index.html')
 
-def register(request):
-    registered = False
-    if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            registered = True
-            form = Form.objects.get_or_create(user=user)
-        else: 
-            print user_form.errors
-    else:
-        user_form = UserForm()
+def register(username, password):
+    user = User.objects.create_user(username, password)
+    print 'new user created'
+    form = Form.objects.get_or_create(user=user)
 
 @csrf_exempt
 def user_login(request):
@@ -37,23 +27,24 @@ def user_login(request):
         username = request.POST['username']
         print 'username: ' + username
         password = request.POST['password']
+        print 'password: ' + password
         user = authenticate(username=username, password=password)
+        print 'user: ' +  str(user)
         if user is not None:
-            print 'is user'
-            login(request, user)
-            if request.is_ajax():
-                return HttpResponse("")
-            return HttpResponseRedirect(reverse('form'))
+            if user.is_active:
+                print 'is user'
+                login(request, user)
+                form = Form.objects.get(user=user)
+                question_num = form.last_completed()
+                print 'question_num_returned: ' + str(question_num)
         else:
-            # need to create a new account
-            register(request)
+            print 'registering user'
+            user = User.objects.create_user(username, '', password)
+            print 'new user created ' + str(user.username)
+            form = Form.objects.get_or_create(user=user)
             question_num = 1
-            print str(Question.objects.get(id=question_num))
-            if request.is_ajax():
-                return HttpResponse("")
-            return render(request, 'visas/form.html', 
-                        {'question_num': Question.objects.get(id=question_num)})
-        
+        if request.is_ajax():
+            return HttpResponse(question_num, content_type="text/plain")
    else: 
         return render(request,'visas/index.html')
 
