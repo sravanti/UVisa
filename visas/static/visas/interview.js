@@ -101,7 +101,7 @@ function toggleAudio() {
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-ok";
 		document.getElementById("recording-button").className = "btn btn-lg btn-success col-md-offset-3";
 		document.getElementById("next-button").className = "btn btn-lg btn-primary col-md-offset-3";
-		submitData();
+		submitData('n/a');
 	}
 	else { //waiting or sent --> begin capturing
 		submitted = false;
@@ -143,7 +143,7 @@ function nextVideo() {
 function resetVideoControls() {
 	//submit data if user didn't yet
 	if (submitted == false) {
-		submitData();
+		submitData('n/a');
 	}
 
 	//reset notes box
@@ -174,14 +174,14 @@ function prevVideo() {
 }
 
 //upload files to database
-function submitData() {
+function submitData(userLogic) {
 	submitted = true;
 	var dataNote = document.getElementById("notes-box").value;
 
     $.ajax({
          type: 'POST',
          url: 'submit/',
-         data: {'text': dataNote, 'username': userName, 'password': userID, 'question': questionCounter},
+         data: {'text': dataNote, 'username': userName, 'password': userID, 'question': questionCounter, 'logic': userLogic},
          //success: function(data) {
          //   beginInterview('English');
          //   }
@@ -254,6 +254,7 @@ function getNextQuestion(currentQuestion) {
 //stores yes/no answer and moves onto next video
 function answerLogic(currentAnswer) {
 	userAnswers[questionCounter] = currentAnswer;
+	submitData(currentAnswer);
 	nextVideo();
 }
 
