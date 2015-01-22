@@ -154,7 +154,7 @@ function prevVideo() {
 //upload files to database
 function submitData() {
 	// submitted = true;
-	alert('SUBMITDATA()');
+	console.log('SUBMITDATA()');
 
 	//send text, audio, transcript
 }
@@ -171,12 +171,30 @@ function setEndIcon() {
 // EMERGENCY VIDEO
 //================================================================================
 
+var logicButtonsOn;
+var userButtonsOn;
+
 //switch to emergency video and disable user inputs
 $("#emergency").click(function() {
+	//detect current buttons
+	if (document.getElementById("emergencyButtons").style.display == "none") { //not already in emergency mode
+		if (document.getElementById("userButtons").style.display == "none") {
+			userButtonsOn = false;
+		} else {
+			userButtonsOn = true;
+		}
+		if (document.getElementById("logicButtons").style.display == "none") {
+			logicButtonsOn = false;
+		} else {
+			logicButtonsOn = true;
+		}
+	}
+
 	if (loggedIn == true) {
 		document.getElementById("video-frame").src = emergencyURL + '?rel=0&autoplay=1';
 		document.getElementById("userButtons").style.display = "none";
 		document.getElementById("userNotes").style.display = "none";
+		document.getElementById("logicButtons").style.display = "none";
 		document.getElementById("emergencyButtons").style.display = "block";
 	} else {
 		alert("Please sign in to use this feature.");
@@ -186,9 +204,14 @@ $("#emergency").click(function() {
 //return to previous video and enable user inputs
 $("#emergencyResume").click(function() {
 	document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
-	document.getElementById("userButtons").style.display = "block";
-	document.getElementById("userNotes").style.display = "block";
 	document.getElementById("emergencyButtons").style.display = "none";
+	if (userButtonsOn) {
+		document.getElementById("userButtons").style.display = "block";
+		document.getElementById("userNotes").style.display = "block";
+	}
+	if (logicButtonsOn) {
+		document.getElementById("logicButtons").style.display = "block";
+	}
 });
 
 //================================================================================
