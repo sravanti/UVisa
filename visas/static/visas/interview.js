@@ -183,7 +183,7 @@ function submitData(userLogic) {
     $.ajax({
          type: 'POST',
          url: 'submit/',
-         data: {'text': dataNote, 'username': userName, 'password': userID, 'question': questionCounter, 'logic': userLogic},
+         data: {'text': dataNote, 'username': userName, 'question': questionCounter, 'logic': userLogic, 'audio': currentBlob},
          //success: function(data) {
          //   beginInterview('English');
          //   }
