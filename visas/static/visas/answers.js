@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 $("#login").on("click", function() {
-    var username = document.getElementById("inputName").value;
+    var userName = document.getElementById("inputName").value;
 
     $.ajax({
         type: 'POST',
