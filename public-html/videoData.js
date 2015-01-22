@@ -1,3 +1,7 @@
+//Emergency Video
+var emergencyURL = "http://www.youtube.com/embed/JzbgqBVKnZc";
+
+//Regular Videos
 var videoData = { //keyed by question number
 	0:{
 		"title":"Introduction",

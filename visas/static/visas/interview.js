@@ -25,9 +25,6 @@ var userName;
 var userID;
 var currentBlob;
 
-//Emergency Video
-var emergencyURL = "http://www.youtube.com/embed/DDY346OQCDo";
-
 //================================================================================
 // MAIN
 //================================================================================
