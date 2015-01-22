@@ -153,6 +153,7 @@ function prevVideo() {
 //upload files to database
 function submitData() {
 	submitted = true;
+	alert('SUBMITDATA()');
 
 	//send text, audio, transcript
 }

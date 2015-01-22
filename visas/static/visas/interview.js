@@ -11,7 +11,7 @@ Outstanding concerns:
 //General
 var language = "UNASSIGNED"; //"English" or "Spanish"
 var recording = 0; //0: waiting, 1: recording, 2: submitting
-var submitted = false;
+//var submitted = false;
 var loggedIn = false;
 
 //Current Question/Video Settings
@@ -104,7 +104,7 @@ function toggleAudio() {
 		submitData('n/a');
 	}
 	else { //waiting or sent --> begin capturing
-		submitted = false;
+//		submitted = false;
 		recording = 1;
 		document.getElementById("recording-button").className = "btn btn-lg btn-danger col-md-offset-3";
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-record";
@@ -142,9 +142,10 @@ function nextVideo() {
 
 function resetVideoControls() {
 	//submit data if user didn't yet
-	if (submitted == false) {
-		submitData('n/a');
-	}
+	// if (submitted == false) {
+	// 	submitData('n/a');
+	// }
+	submitData('n/a');
 
 	//reset notes box
 	document.getElementById("notes-box").value = "";
@@ -175,7 +176,7 @@ function prevVideo() {
 
 //upload files to database
 function submitData(userLogic) {
-	submitted = true;
+//	submitted = true;
 	var dataNote = document.getElementById("notes-box").value;
 
     $.ajax({
