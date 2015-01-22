@@ -6,7 +6,7 @@ $("#login").on("click", function() {
 
     $.ajax({
         type: 'POST',
-        url: 'lookup/',
+        url: 'lookupuser/',
         data: {'username': userName},
 
         success: function(data, textStatus, request){
