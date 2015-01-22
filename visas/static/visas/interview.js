@@ -72,7 +72,7 @@ function beginInterview(userLang) {
 		document.getElementById("content-prompt-english").style.display = "block";
 
 		//display first video
-		goToQuestion(0); //first video
+		goToQuestion(0, false); //first video
 	}
 }
 /*
@@ -86,9 +86,9 @@ $(document).ready(function() {
 });
 */
 //for playing a particular video based on known question number
-function goToQuestion(num) {
+function goToQuestion(num, fromPrev) {
 		resetVideoControls();
-		loadVideo(num);
+		loadVideo(num, fromPrev);
 		displayButtons();
 		document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
 		document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';	
@@ -125,7 +125,7 @@ function nextVideo() {
 	resetVideoControls();
 
 	//display next video
-	var videoLoaded = loadVideo(getNextQuestion(questionCounter));
+	var videoLoaded = loadVideo(getNextQuestion(questionCounter), false);
 
 	displayButtons();
 
@@ -171,7 +171,7 @@ function displayButtons() {
 }
 
 function prevVideo() {
-	goToQuestion(questionBack[questionCounter]);
+	goToQuestion(questionBack[questionCounter], true);
 }
 
 //upload files to database
@@ -267,15 +267,16 @@ function answerLogic(currentAnswer) {
 
 //sets global variables for displaying video/title
 //returns false if there are no more videos to display
-function loadVideo(questionNumber) {
+function loadVideo(questionNumber, fromPrev) {
 	if (videoData[questionNumber] == undefined) {
 		return(false);
 	} else {
 		questionTitle = videoData[questionNumber]["title"];
 		questionURL = videoData[questionNumber]["url"];
 		questionLogic = videoData[questionNumber]["logic"];
-		questionBack[questionNumber] = questionCounter; //track how we got here
-		questionCounter = questionNumber;
+		if (fromPrev == false) {
+			questionBack[questionNumber] = questionCounter; //track how we got here
+		}		questionCounter = questionNumber;
 		return(true);
 	}
 }

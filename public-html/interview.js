@@ -11,7 +11,7 @@ Outstanding concerns:
 //General
 var language = "UNASSIGNED"; //"English" or "Spanish"
 var recording = 0; //0: waiting, 1: recording, 2: submitting
-var submitted = false;
+// var submitted = false;
 var loggedIn = false;
 
 //Current Question/Video Settings
@@ -49,7 +49,7 @@ function beginInterview(userLang) {
 		document.getElementById("content-prompt-english").style.display = "block";
 
 		//display first video
-		goToQuestion(0); //first video
+		goToQuestion(0, false); //first video
 	}
 }
 
@@ -63,9 +63,9 @@ $(document).ready(function() {
 });
 
 //for playing a particular video based on known question number
-function goToQuestion(num) {
+function goToQuestion(num, fromPrev) {
 		resetVideoControls();
-		loadVideo(num);
+		loadVideo(num, fromPrev);
 		displayButtons();
 		document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
 		document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';	
@@ -81,7 +81,7 @@ function toggleAudio() {
 		submitData();
 	}
 	else { //waiting or sent --> begin capturing
-		submitted = false;
+		// submitted = false;
 		recording = 1;
 		document.getElementById("recording-button").className = "btn btn-lg btn-danger col-md-offset-3";
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-record";
@@ -102,7 +102,7 @@ function nextVideo() {
 	resetVideoControls();
 
 	//display next video
-	var videoLoaded = loadVideo(getNextQuestion(questionCounter));
+	var videoLoaded = loadVideo(getNextQuestion(questionCounter), false);
 
 	displayButtons();
 
@@ -119,9 +119,10 @@ function nextVideo() {
 
 function resetVideoControls() {
 	//submit data if user didn't yet
-	if (submitted == false) {
-		submitData();
-	}
+	// if (submitted == false) {
+	// 	submitData();
+	// }
+	submitData();
 
 	//reset notes box
 	document.getElementById("notes-box").value = "";
@@ -147,12 +148,12 @@ function displayButtons() {
 }
 
 function prevVideo() {
-	goToQuestion(questionBack[questionCounter]);
+	goToQuestion(questionBack[questionCounter], true);
 }
 
 //upload files to database
 function submitData() {
-	submitted = true;
+	// submitted = true;
 	alert('SUBMITDATA()');
 
 	//send text, audio, transcript
@@ -230,14 +231,16 @@ function answerLogic(currentAnswer) {
 
 //sets global variables for displaying video/title
 //returns false if there are no more videos to display
-function loadVideo(questionNumber) {
+function loadVideo(questionNumber, fromPrev) {
 	if (videoData[questionNumber] == undefined) {
 		return(false);
 	} else {
 		questionTitle = videoData[questionNumber]["title"];
 		questionURL = videoData[questionNumber]["url"];
 		questionLogic = videoData[questionNumber]["logic"];
-		questionBack[questionNumber] = questionCounter; //track how we got here
+		if (fromPrev == false) {
+			questionBack[questionNumber] = questionCounter; //track how we got here
+		}
 		questionCounter = questionNumber;
 		return(true);
 	}
