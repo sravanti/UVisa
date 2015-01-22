@@ -49,13 +49,15 @@ $("#login").on("click", function() {
          //   beginInterview('English');
          //   }
         success: function(data, textStatus, request){
-        alert(data);
+        console.log("You've returned to Question #: " + data);
+        beginInterview(); //initialize
+        resumeInterview(data); //go to video
         }
     });
 });
 });
 
-//after user first logs in, show next prompt
+//initialize login settings
 function beginInterview(userLang) {
 	loggedIn = true;
 	language = userLang;
@@ -64,18 +66,25 @@ function beginInterview(userLang) {
 	// console.log("name: " + userName);
 	// console.log("ID: " + userID);
 
-	if ((userName !== "") && (userID !== "")) { //required info was provided
+	// if ((userName !== "") && (userID !== "")) { //required info was provided
 		//submit NAME/ID to database
 		//get back question number; store as questionCounter (GLOBAL)
 
 		//switch to video display screen
-		document.getElementById("content-welcome").style.display = "none";
-		document.getElementById("content-prompt-english").style.display = "block";
+		// document.getElementById("content-welcome").style.display = "none";
+		// document.getElementById("content-prompt-english").style.display = "block";
 
-		//display first video
-		goToQuestion(0, false); //first video
-	}
+		// //display first video
+		// goToQuestion(0, false); //first video
+	// }
 }
+
+function resumeInterview(questionNumber) {
+	document.getElementById("content-welcome").style.display = "none";
+	document.getElementById("content-prompt-english").style.display = "block";
+	goToQuestion(questionNumber, false);
+}
+
 /*
 $(document).ready(function() {
 	$.ajax({

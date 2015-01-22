@@ -24,6 +24,8 @@ var questionBack = []; //index = this question, value = the previous question (h
 //Emergency Video
 var emergencyURL = "http://www.youtube.com/embed/DDY346OQCDo";
 
+var currentBlob;
+
 //================================================================================
 // MAIN
 //================================================================================
@@ -31,36 +33,60 @@ var emergencyURL = "http://www.youtube.com/embed/DDY346OQCDo";
 //Initialization
 document.getElementById("content-prompt-english").style.display = "none";
 
-//after user first logs in, show next prompt
+//login
+$(document).ready(function() {
+
+$("#login").on("click", function() {
+    var username = document.getElementById("inputName").value;
+    var password  = document.getElementById("inputID").value;
+    // $.ajax({
+    //      type: 'POST',
+    //      url: 'login/',
+    //      data: {'username': username, 'password': password},
+    //      //success: function(data) {
+    //      //   beginInterview('English');
+    //      //   }
+    //     success: function(data, textStatus, request){
+    //     console.log("You've returned to Question #: " + data);
+    //     beginInterview(); //initialize
+    //     resumeInterview(data); //go to video
+    //     }
+    // });
+
+    var data = 2;
+    console.log("You've returned to Question #: " + data);
+    beginInterview(); //initialize
+    resumeInterview(data); //go to video
+});
+});
+
+//initialize login settings
 function beginInterview(userLang) {
 	loggedIn = true;
 	language = userLang;
-	var userName = document.getElementById("inputName").value;
-	var userID = document.getElementById("inputID").value;
+	userName = document.getElementById("inputName").value;
+	userID = document.getElementById("inputID").value;
 	// console.log("name: " + userName);
 	// console.log("ID: " + userID);
 
-	if ((userName !== "") && (userID !== "")) { //required info was provided
+	// if ((userName !== "") && (userID !== "")) { //required info was provided
 		//submit NAME/ID to database
 		//get back question number; store as questionCounter (GLOBAL)
 
 		//switch to video display screen
-		document.getElementById("content-welcome").style.display = "none";
-		document.getElementById("content-prompt-english").style.display = "block";
+		// document.getElementById("content-welcome").style.display = "none";
+		// document.getElementById("content-prompt-english").style.display = "block";
 
-		//display first video
-		goToQuestion(0, false); //first video
-	}
+		// //display first video
+		// goToQuestion(0, false); //first video
+	// }
 }
 
-$(document).ready(function() {
-	$.ajax({
-		type: 'POST',
-		url: 'login',
-		data: {'username': "BRIAN", 'password': "123"},
-		success: function(response){alert('yay');}
-    });
-});
+function resumeInterview(questionNumber) {
+	document.getElementById("content-welcome").style.display = "none";
+	document.getElementById("content-prompt-english").style.display = "block";
+	goToQuestion(questionNumber, false);
+}
 
 //for playing a particular video based on known question number
 function goToQuestion(num, fromPrev) {
@@ -155,6 +181,7 @@ function prevVideo() {
 function submitData() {
 	// submitted = true;
 	console.log('SUBMITDATA()');
+	// console.log(currentBlob.type);
 
 	//send text, audio, transcript
 }
