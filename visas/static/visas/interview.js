@@ -23,6 +23,7 @@ var questionBack = []; //index = this question, value = the previous question (h
 
 var userName;
 var userID;
+var currentBlob;
 
 //Emergency Video
 var emergencyURL = "http://www.youtube.com/embed/DDY346OQCDo";
@@ -187,7 +188,7 @@ function submitData(userLogic) {
          //   beginInterview('English');
          //   }
         success: function(data, textStatus, request){
-        alert(data);
+        // alert(data);
         }
     });
 
