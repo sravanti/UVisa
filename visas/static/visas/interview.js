@@ -11,7 +11,6 @@ Outstanding concerns:
 //General
 var language = "UNASSIGNED"; //"English" or "Spanish"
 var recording = 0; //0: waiting, 1: recording, 2: submitting
-//var submitted = false;
 var loggedIn = false;
 
 //Current Question/Video Settings
@@ -82,16 +81,6 @@ function resumeInterview(questionNumber) {
 	goToQuestion(questionNumber, false);
 }
 
-/*
-$(document).ready(function() {
-	$.ajax({
-		type: "POST",
-		url: 'login',
-		data: {'username': "BRIAN", 'password': "123"},
-		success: function(response){alert('yay');}
-    });
-});
-*/
 //for playing a particular video based on known question number
 function goToQuestion(num, fromPrev) {
 		resetVideoControls();
@@ -111,7 +100,6 @@ function toggleAudio() {
 		submitData('n/a');
 	}
 	else { //waiting or sent --> begin capturing
-//		submitted = false;
 		recording = 1;
 		document.getElementById("recording-button").className = "btn btn-lg btn-danger col-md-offset-3";
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-record";
@@ -148,10 +136,6 @@ function nextVideo() {
 }
 
 function resetVideoControls() {
-	//submit data if user didn't yet
-	// if (submitted == false) {
-	// 	submitData('n/a');
-	// }
 	submitData('n/a');
 
 	//reset notes box
@@ -183,16 +167,12 @@ function prevVideo() {
 
 //upload files to database
 function submitData(userLogic) {
-//	submitted = true;
 	var dataNote = document.getElementById("notes-box").value;
 
     $.ajax({
          type: 'POST',
          url: 'submit/',
          data: {'text': dataNote, 'username': userName, 'question': questionCounter, 'logic': userLogic, 'audio': currentBlob},
-         //success: function(data) {
-         //   beginInterview('English');
-         //   }
         success: function(data, textStatus, request){
         // alert(data);
         }
