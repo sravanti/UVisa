@@ -129,12 +129,14 @@ console.log("RECORDBUTTON()" + userChoice);
 function nextVideo() {
 console.log("NEXTVIDEO()");
 	resetVideoControls();
-
+console.log("questionCounter = " + questionCounter);
+console.log("getNextQuestion(questionCounter) = " + getNextQuestion(questionCounter));
+console.log("loadVideo(getNextQuestion(questionCounter)) = " + loadVideo(getNextQuestion(questionCounter)));
 	//display next video
 	var videoLoaded = loadVideo(getNextQuestion(questionCounter), false);
 
 	displayButtons();
-
+console.log("GOT PAST IT!");
 	if (videoLoaded == true) {
 		console.log("trying to get next video. URL: " + questionURL);
 		document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
