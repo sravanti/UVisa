@@ -56,6 +56,7 @@ $("#login,#login-es").on("click", function() {
 
 //initialize login settings
 function beginInterview(userLang) {
+console.log("BEGININTERVIEW()" + userLang);
 	loggedIn = true;
 	language = userLang;
 	userName = document.getElementById("inputName").value;
@@ -77,6 +78,7 @@ function beginInterview(userLang) {
 }
 
 function resumeInterview(questionNumber) {
+console.log("RESUMEINTERVIEW()" + questionNumber);
 	document.getElementById("content-welcome").style.display = "none";
 	document.getElementById("content-prompt-english").style.display = "block";
 	goToQuestion(questionNumber, false);
@@ -84,6 +86,7 @@ function resumeInterview(questionNumber) {
 
 //for playing a particular video based on known question number
 function goToQuestion(num, fromPrev) {
+console.log("GOTOQUESTION()" + num + fromPrev);
 		resetVideoControls();
 		loadVideo(num, fromPrev);
 		displayButtons();
@@ -93,6 +96,7 @@ function goToQuestion(num, fromPrev) {
 
 //toggles the record/success button
 function toggleAudio() {
+console.log("TOGGLEAUDIO()");
 	if (recording ==1) { //capturing --> begin sending
 		recording = 2;
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-ok";
@@ -113,6 +117,7 @@ function toggleAudio() {
 
 //change button after user accepts/denies permission to use microphone
 function recordButton(userChoice) {
+console.log("RECORDBUTTON()" + userChoice);
 	if (userChoice == "allow") {
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-record blink";
 	} else {
@@ -122,6 +127,7 @@ function recordButton(userChoice) {
 
 //reset buttons and play next video prompt
 function nextVideo() {
+console.log("NEXTVIDEO()");
 	resetVideoControls();
 
 	//display next video
@@ -141,6 +147,7 @@ function nextVideo() {
 }
 
 function resetVideoControls() {
+console.log("RESETVIDEOCONTROLS()");
 	submitData('n/a');
 
 	//reset notes box
@@ -154,6 +161,7 @@ function resetVideoControls() {
 }
 
 function displayButtons() {
+console.log("DISPLAYBUTTONS()");
 	if (questionLogic == true) {
 		document.getElementById("userButtons").style.display = "none";
 		document.getElementById("userNotes").style.display = "none";
@@ -167,11 +175,13 @@ function displayButtons() {
 }
 
 function prevVideo() {
+console.log("PREVVIDEO()");
 	goToQuestion(questionBack[questionCounter], true);
 }
 
 //upload files to database
 function submitData(userLogic) {
+console.log("SUBMITDATA()");
 	var dataNote = document.getElementById("notes-box").value;
 
 	console.log("Preparing to Submit a Blob. Let's look at the Blob for QUESTION #: " + questionCounter);
@@ -271,6 +281,7 @@ var userAnswers = []; //user replies, indexed by question number
 
 //returns question number of next question in logic tree
 function getNextQuestion(currentQuestion) {
+console.log("getNextQuestion()");
 	var currentAnswer = userAnswers[currentQuestion];
 	if (currentAnswer == undefined) {
 		if (questionTree[currentQuestion]["next"] !== undefined) { //question did not care about user answer
@@ -289,6 +300,7 @@ function getNextQuestion(currentQuestion) {
 
 //stores yes/no answer and moves onto next video
 function answerLogic(currentAnswer) {
+console.log("answerLogic()");
 	userAnswers[questionCounter] = currentAnswer;
 	submitData(currentAnswer);
 	nextVideo();
@@ -303,6 +315,7 @@ function answerLogic(currentAnswer) {
 //sets global variables for displaying video/title
 //returns false if there are no more videos to display
 function loadVideo(questionNumber, fromPrev) {
+console.log("loadVideo()");
 	if (videoData[questionNumber] == undefined) {
 		return(false);
 	} else {
