@@ -136,6 +136,7 @@ console.log("NEXTVIDEO()");
 	displayButtons();
 
 	if (videoLoaded == true) {
+		console.log("trying to get next video. URL: " + questionURL);
 		document.getElementById("question-title").innerHTML = questionCounter + ". " + questionTitle;
 		document.getElementById("video-frame").src = questionURL + '?rel=0&autoplay=1';
 	} else { //no more videos; display Goodbye screen
