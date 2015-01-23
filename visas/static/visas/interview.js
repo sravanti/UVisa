@@ -34,7 +34,7 @@ document.getElementById("content-prompt-english").style.display = "none";
 //login
 $(document).ready(function() {
 
-$("#login").on("click", function() {
+$("#login,#login-es").on("click", function() {
     var username = document.getElementById("inputName").value;
     var password  = document.getElementById("inputID").value;
     $.ajax({
