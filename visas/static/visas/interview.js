@@ -178,7 +178,7 @@ console.log("SUBMITDATA()");
     xhr.onreadystatechange = function ( response ) {};
     xhr.send( formData );
 
-    e.preventDefault(); 
+    //e.preventDefault(); 
     /*
     $.ajax({
          type: 'POST',

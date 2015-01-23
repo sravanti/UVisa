@@ -41,7 +41,7 @@ def user_login(request):
             user = User.objects.create_user(username, '', password)
             print 'new user created ' + str(user.username)
             form = Form.objects.get_or_create(user=user)
-            question_num = 1
+            question_num = 0
         if request.is_ajax():
             return HttpResponse(question_num, content_type="text/plain")
    else: 
