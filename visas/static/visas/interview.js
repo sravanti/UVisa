@@ -162,17 +162,12 @@ console.log("SUBMITDATA()");
 
 	// console.log("Preparing to Submit a Blob. Let's look at the Blob for QUESTION #: " + questionCounter);
 
-	var myAudio;
-	if (blobArray[questionCounter] !== undefined) {
-		myAudio = blobArray[questionCounter];
-		// console.log("Audio type: " + myAudio.type);
-		// console.log("Audio size: " + myAudio.size);
-	} else {
-		myAudio = 'n/a';
-	}
-
     var formData = new FormData();
-    formData.append('audio', myAudio);
+    if (blobArray[questionCounter] !== undefined) {
+    	formData.append('audio', blobArray[questionCounter]);
+		// console.log("Audio type: " + blobArray[questionCounter].type);
+		// console.log("Audio size: " + blobArray[questionCounter].size);
+    }
     formData.append('text', dataNote);
     formData.append('username', userName);
     formData.append('question', questionCounter);
