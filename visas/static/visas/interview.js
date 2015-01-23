@@ -171,11 +171,11 @@ function submitData(userLogic) {
 	var dataNote = document.getElementById("notes-box").value;
 
 	console.log("Preparing to Submit a Blob.");
-	console.log("Blob type: " + blobArray[currentQuestion].type);
-	console.log("Blob size: " + blobArray[currentQuestion].size);
+	console.log("Blob type: " + blobArray[questionCounter].type);
+	console.log("Blob size: " + blobArray[questionCounter].size);
 
     var formData = new FormData();
-    formData.append('audio', blobArray[currentQuestion]);
+    formData.append('audio', blobArray[questionCounter]);
     formData.append('text', dataNote);
     formData.append('username', userName);
     formData.append('question', questionCounter);
