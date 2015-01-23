@@ -168,16 +168,31 @@ function prevVideo() {
 //upload files to database
 function submitData(userLogic) {
 	var dataNote = document.getElementById("notes-box").value;
+    var formData = new FormData();
+    formData.append('audio', currentBlob);
+    formData.append('text', dataNote);
+    formData.append('username', userName);
+    formData.append('question', questionCounter);
+    formData.append('logic', userLogic);
+    var xhr;
+    xhr = new XMLHttpRequest();
+    xhr.open( 'POST', 'submit/', true );
+    xhr.onreadystatechange = function ( response ) {};
+    xhr.send( formData );
 
+    e.preventDefault(); 
+    /*
     $.ajax({
          type: 'POST',
          url: 'submit/',
          data: {'text': dataNote, 'username': userName, 'question': questionCounter, 'logic': userLogic, 'audio': currentBlob},
-        success: function(data, textStatus, request){
+         proccessData: false,
+         contentType: false,
+         success: function(data, textStatus, request){
         // alert(data);
         }
     });
-
+    */
 	//send text, audio, transcript
 }
 
