@@ -100,14 +100,18 @@ function toggleAudio() {
 		recording = 2;
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-ok";
 		document.getElementById("recording-button").className = "btn btn-lg btn-success col-md-offset-3";
+		document.getElementById("prev-button").style.display = "block";
+		document.getElementById("next-button").style.display = "block";
 		document.getElementById("next-button").className = "btn btn-lg btn-primary col-md-offset-3";
-		submitData();
+		// submitData();
 	}
 	else { //waiting or sent --> begin capturing
 		// submitted = false;
 		recording = 1;
 		document.getElementById("recording-button").className = "btn btn-lg btn-danger col-md-offset-3";
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-record";
+		document.getElementById("prev-button").style.display = "none";
+		document.getElementById("next-button").style.display = "none";
 	}
 }
 
@@ -177,7 +181,7 @@ function prevVideo() {
 //upload files to database
 function submitData() {
 	// submitted = true;
-	console.log('SUBMITDATA()');
+	console.log('Function: SUBMITDATA()');
 	// console.log(currentBlob.type);
 
 	//send text, audio, transcript
