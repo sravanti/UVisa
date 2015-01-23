@@ -85,3 +85,7 @@ STATIC_URL = '/static/'
 
 #For templates
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
+#for uploaded media files (aka audio files created during interviews)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

@@ -10,7 +10,7 @@
 (function($){
 	$.extend({
 		voice: {
-			workerPath: "cdn/recorderWorker.js",
+			workerPath: "recorderWorker.js",
 			initCalled: false,
 			stream: false,
 			init: function(){

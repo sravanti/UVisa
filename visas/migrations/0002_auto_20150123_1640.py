@@ -7,14 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('visas', '0003_auto_20150117_1814'),
+        ('visas', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='form',
-            name='answer_set',
-            field=models.ManyToManyField(to='visas.Answer', null=True, blank=True),
+            model_name='answer',
+            name='audio',
+            field=models.FileField(null=True, upload_to=b'audio/%Y/%m/%d', blank=True),
             preserve_default=True,
         ),
     ]
