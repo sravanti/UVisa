@@ -98,7 +98,7 @@ function toggleAudio() {
 		document.getElementById("recording-icon").className = "glyphicon glyphicon-ok";
 		document.getElementById("recording-button").className = "btn btn-lg btn-success col-md-offset-3";
 		document.getElementById("next-button").className = "btn btn-lg btn-primary col-md-offset-3";
-		submitData('n/a');
+		// submitData('n/a');
 	}
 	else { //waiting or sent --> begin capturing
 		recording = 1;
