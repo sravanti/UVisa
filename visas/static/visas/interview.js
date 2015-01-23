@@ -168,6 +168,11 @@ function prevVideo() {
 //upload files to database
 function submitData(userLogic) {
 	var dataNote = document.getElementById("notes-box").value;
+
+	console.log("Preparing to Submit a Blob.");
+	console.log("Blob type: " + currentBlob.type);
+	console.log("Blob size: " + currentBlob.size);
+	
     var formData = new FormData();
     formData.append('audio', currentBlob);
     formData.append('text', dataNote);
