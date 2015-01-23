@@ -170,7 +170,7 @@ function prevVideo() {
 function submitData(userLogic) {
 	var dataNote = document.getElementById("notes-box").value;
 
-	console.log("Preparing to Submit a Blob.");
+	console.log("Preparing to Submit a Blob. Let's look at the Blob for QUESTION #: " + questionCounter);
 	console.log("Blob type: " + blobArray[questionCounter].type);
 	console.log("Blob size: " + blobArray[questionCounter].size);
 
