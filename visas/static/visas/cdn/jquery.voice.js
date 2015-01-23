@@ -64,9 +64,10 @@
 					}else if(type == "URL"){
 						var url = URL.createObjectURL(blob);
 						//oh hey, we have a Blob! Now might be a good time to send it to the server...?
-						currentBlob = blob;
-						// console.log("Blob type: " + blob.type);
-						// console.log("Blob size: " + blob.size);
+						console.log("Storing BLOB for QUESTION #: " + questionCounter);
+						blobArray[questionCounter] = blob;
+						console.log("Blob type: " + blobArray[questionCounter].type);
+						console.log("Blob size: " + blobArray[questionCounter].size);
 						callback(url);
 					}
 				});

@@ -22,7 +22,8 @@ var questionBack = []; //index = this question, value = the previous question (h
 
 var userName;
 var userID;
-var currentBlob;
+// var currentBlob;
+var blobArray = [];
 
 //================================================================================
 // MAIN
@@ -170,11 +171,11 @@ function submitData(userLogic) {
 	var dataNote = document.getElementById("notes-box").value;
 
 	console.log("Preparing to Submit a Blob.");
-	console.log("Blob type: " + currentBlob.type);
-	console.log("Blob size: " + currentBlob.size);
-	
+	console.log("Blob type: " + blobArray[currentQuestion].type);
+	console.log("Blob size: " + blobArray[currentQuestion].size);
+
     var formData = new FormData();
-    formData.append('audio', currentBlob);
+    formData.append('audio', blobArray[currentQuestion]);
     formData.append('text', dataNote);
     formData.append('username', userName);
     formData.append('question', questionCounter);
